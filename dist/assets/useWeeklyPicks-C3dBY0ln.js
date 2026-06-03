@@ -1,0 +1,1 @@
+import{i as e,m as t}from"./db-F1CmG5Ah.js";function n(){return t(()=>e.tasks.where(`isWeeklyPick`).equals(1).toArray())??[]}export{n as t};
