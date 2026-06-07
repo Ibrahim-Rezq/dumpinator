@@ -117,3 +117,12 @@ export async function createWeeklyReset(weekStart: string): Promise<string> {
   await db.weeklyResets.add(reset)
   return reset.id
 }
+
+export async function importAllData(tasks: Task[], weeklyResets: WeeklyReset[]): Promise<void> {
+  await db.transaction('rw', db.tasks, db.weeklyResets, async () => {
+    await db.tasks.clear()
+    await db.weeklyResets.clear()
+    await db.tasks.bulkAdd(tasks)
+    await db.weeklyResets.bulkAdd(weeklyResets)
+  })
+}

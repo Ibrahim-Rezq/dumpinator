@@ -9,6 +9,7 @@ const FocusScreen       = lazy(() => import('@/screens/FocusScreen').then((m) =>
 const AllTasksScreen    = lazy(() => import('@/screens/AllTasksScreen').then((m) => ({ default: m.AllTasksScreen })))
 const ParkedScreen      = lazy(() => import('@/screens/ParkedScreen').then((m) => ({ default: m.ParkedScreen })))
 const WeeklyResetScreen = lazy(() => import('@/screens/WeeklyResetScreen').then((m) => ({ default: m.WeeklyResetScreen })))
+const SettingsScreen    = lazy(() => import('@/screens/SettingsScreen').then((m) => ({ default: m.SettingsScreen })))
 
 export default function App() {
   return (
@@ -21,7 +22,8 @@ export default function App() {
           <Route path="focus" element={<Suspense><FocusScreen /></Suspense>} />
           <Route path="all"   element={<Suspense><AllTasksScreen /></Suspense>} />
           <Route path="parked" element={<Suspense><ParkedScreen /></Suspense>} />
-          <Route path="reset" element={<Suspense><WeeklyResetScreen /></Suspense>} />
+          <Route path="reset"    element={<Suspense><WeeklyResetScreen /></Suspense>} />
+          <Route path="settings" element={<Suspense><SettingsScreen /></Suspense>} />
         </Route>
       </Routes>
     </HashRouter>

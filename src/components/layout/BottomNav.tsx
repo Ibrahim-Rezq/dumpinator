@@ -1,12 +1,13 @@
 import { useLocation, useNavigate } from 'react-router-dom'
-import { InboxIcon, ArrowUpDownIcon, StarIcon, ListIcon } from 'lucide-react'
+import { InboxIcon, ArrowUpDownIcon, StarIcon, ListIcon, Settings2Icon } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
 const tabs = [
   { path: '/',      label: 'Dump',  Icon: InboxIcon },
   { path: '/sort',  label: 'Sort',  Icon: ArrowUpDownIcon },
   { path: '/focus', label: 'Focus', Icon: StarIcon },
-  { path: '/all',   label: 'All',   Icon: ListIcon },
+  { path: '/all',      label: 'All',      Icon: ListIcon },
+  { path: '/settings', label: 'Settings', Icon: Settings2Icon },
 ]
 
 export function BottomNav() {
