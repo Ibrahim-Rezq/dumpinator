@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react'
 import { Trash2Icon } from 'lucide-react'
+import { SubTaskProgressPill } from '@/components/ui/SubTaskProgressPill'
 import {
   Dialog,
   DialogContent,
@@ -75,7 +76,14 @@ export function TaskCard({ task }: TaskCardProps) {
               className="w-full text-heading text-foreground bg-transparent border-none outline-none font-sans"
             />
           ) : (
-            <span className="text-body text-foreground">{task.text}</span>
+            <>
+              <span className="text-body text-foreground">{task.text}</span>
+              {task.subTasks.length > 0 && (
+                <div className="mt-0.5">
+                  <SubTaskProgressPill subTasks={task.subTasks} />
+                </div>
+              )}
+            </>
           )}
         </div>
 

@@ -87,10 +87,13 @@ export async function toggleSubTask(taskId: string, subTaskId: string): Promise<
   await db.transaction('rw', db.tasks, async () => {
     const task = await db.tasks.get(taskId)
     if (!task) return
+    const updated = task.subTasks.map((st) =>
+      st.id === subTaskId ? { ...st, done: !st.done } : st
+    )
+    const allDone = updated.length > 0 && updated.every((st) => st.done)
     await db.tasks.update(taskId, {
-      subTasks: task.subTasks.map((st) =>
-        st.id === subTaskId ? { ...st, done: !st.done } : st
-      ),
+      subTasks: updated,
+      ...(allDone ? { status: 'done' as const } : {}),
       updatedAt: now(),
     })
   })

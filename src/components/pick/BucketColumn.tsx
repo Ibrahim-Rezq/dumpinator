@@ -1,4 +1,5 @@
 import { Badge } from '@/components/ui/badge'
+import { SubTaskProgressPill } from '@/components/ui/SubTaskProgressPill'
 import { useTasksByBucket } from '@/hooks/useTasks'
 import type { Bucket, Task } from '@/types'
 import { cn } from '@/lib/utils'
@@ -60,6 +61,9 @@ export function BucketColumn({ bucket, selectedIds, maxReached, onToggle }: Buck
             <span className={cn('flex-1 text-body', selected ? 'text-foreground font-medium' : 'text-muted-foreground')}>
               {task.text}
             </span>
+            {task.subTasks.length > 0 && (
+              <SubTaskProgressPill subTasks={task.subTasks} />
+            )}
             {task.category && (
               <Badge variant="secondary" className="text-caption shrink-0">{task.category}</Badge>
             )}

@@ -25,6 +25,13 @@ export function FocusCard({ task }: FocusCardProps) {
 
   useEffect(() => () => clearTimeout(timerRef.current), [])
 
+  useEffect(() => {
+    if (task.status === 'done' && !completing) {
+      setCompleting(true)
+      timerRef.current = setTimeout(() => void markTaskDone(task.id), 350)
+    }
+  }, [task.status, task.id, completing])
+
   function handleDone() {
     if (completing) return
     setCompleting(true)
