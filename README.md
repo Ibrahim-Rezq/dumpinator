@@ -1,73 +1,35 @@
-# React + TypeScript + Vite
+# Dumpinator
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+An ADHD brain-dump task manager. Everything in your head goes in, three things come out.
 
-Currently, two official plugins are available:
+Task lists have a known failure mode: you write down forty things, feel organized for a day, then stop opening the app because the list got too heavy to look at. Dumpinator is built around that failure mode instead of pretending it doesn't happen.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+Try it: [dumpinator.vercel.app](https://dumpinator.vercel.app)
 
-## React Compiler
+## How it works
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+The week runs in a loop:
 
-## Expanding the ESLint configuration
+1. **Dump.** Empty your head. No sorting, no priorities, just get it all out.
+2. **Sort.** Each task goes into one of three buckets: must, should, or want.
+3. **Pick.** Choose three tasks for the week. Only three.
+4. **Focus.** Work from a screen that shows your picks and nothing else.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+At the end of the week there's a reset. Done tasks get archived, stale ones can be parked, and the loop starts again. Parked tasks stay out of sight until you decide they matter again.
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## Local only
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+There's no backend and no account. All data lives in your browser: tasks in IndexedDB, settings in localStorage. It's an installable PWA and works offline. Nothing leaves your device.
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## Running it
+
+```bash
+npm install
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+`npm run build` for a production build, `npm run preview` to check it locally.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## Stack
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+Vite, React 19, TypeScript, Tailwind v4, shadcn/ui, Zustand, Dexie over IndexedDB, React Router.
